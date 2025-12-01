@@ -1,0 +1,16 @@
+services:
+  3xui:
+    image: utoptop/3x-ui:latest
+    container_name: 3x-ui
+    # hostname: yourhostname <- optional
+    volumes:
+      - ./db/:/etc/x-ui/
+      - ./cert/:/root/cert/
+    environment:
+      XRAY_VMESS_AEAD_FORCED: "false"
+      XUI_ENABLE_FAIL2BAN: "true"
+    tty: true
+    network_mode: host
+    restart: unless-stopped
+
+# 默认端口2053
