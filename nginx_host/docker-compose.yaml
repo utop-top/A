@@ -1,0 +1,14 @@
+services:
+  nginx:
+    image: utoptop/nginx:latest
+#    image: utoptop/nginx-acme:latest
+    container_name: nginx
+    restart: always
+    network_mode: "host"
+    ports:
+      - "8081:80"
+      - "4443:443"
+    volumes:
+      - ./certs:/var/cache/nginx/acme-letsencrypt   # 映射证书目录
+      - ./nginx:/etc/nginx
+      - ./server:/etc/nginx/server
