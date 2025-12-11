@@ -1,0 +1,13 @@
+services:
+  haproxy:
+    restart: unless-stopped
+    image: haproxy:latest
+    container_name: haproxy
+    user: "0:0"
+    cap_add:
+      - ALL                     # 或者只加 NET_BIND_SERVICE + NET_RAW 等你需要的
+    privileged: true
+    # 启用 Host 网络模式
+    network_mode: host # 👈 关键
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
